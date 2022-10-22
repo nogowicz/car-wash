@@ -1,7 +1,9 @@
-import { Dimensions, StyleSheet, View, Text } from "react-native";
-import { Ionicons, MaterialCommunityIcons, FontAwesome5 } from '@expo/vector-icons';
+import { Dimensions, StyleSheet, View, Text, Image, TouchableOpacity } from "react-native";
+import { Ionicons, FontAwesome5 } from '@expo/vector-icons';
+import FaqButton from "../components/FaqButton";
 
-function MainScreen() {
+function MainScreen({ navigation }) {
+
     return (
         <View style={styles.container}>
             <View style={styles.theme}>
@@ -9,39 +11,52 @@ function MainScreen() {
                 <View style={[styles.ellipse, { top: -100, left: -100 }]} />
             </View>
             <View style={styles.upperButtons}>
-                <View style={{ justifyContent: 'center' }}>
-                    <Ionicons name="log-in-outline" size={32} color="black" />
-                    <Text style={[styles.upperButtonsText]}>Log out</Text>
+                <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+                    <TouchableOpacity style={[{ width: 45, height: 45, borderRadius: 60 }]}>
+                        <Ionicons name="log-in-outline" size={32} color="black" />
+                        <Text style={[styles.upperButtonsText]}>Log out</Text>
+                    </TouchableOpacity>
                 </View>
-                <View style={{ justifyContent: 'center' }}>
-                    <MaterialCommunityIcons name="account-settings" size={32} color="black" style={{ marginHorizontal: 8 }} />
-                    <Text style={[styles.upperButtonsText]}>Settings</Text>
-                </View>
+                <TouchableOpacity activeOpacity={0.7} style={[{ width: 45, height: 45, borderRadius: 60 }]}>
+                    <View style={{ justifyContent: 'center' }}>
+                        <View style={styles.profileLogo}>
+                            <Image style={{ width: 30, height: 30, borderRadius: 16 }} source={require('../assets/portrait.jpg')} />
+                        </View>
+                    </View>
+                </TouchableOpacity>
 
             </View>
             <View style={styles.logo}>
-                <FontAwesome5 name="car-alt" size={80} color="#4563BF" />
+                <FontAwesome5 name="car-alt" size={60} color="#4563BF" />
                 <Text style={[styles.title]}>Car Wash</Text>
             </View>
 
             <View style={styles.buttonContainer}>
                 <View style={styles.buttonRow}>
-                    <View style={styles.button}>
+                    <TouchableOpacity
+                        activeOpacity={0.7}
+                        style={styles.button}
+                        onPress={() => {
+                            navigation.navigate('BookScreen')
+                        }}>
                         <Text style={styles.buttonText}>Book the date</Text>
-                    </View>
-                    <View style={styles.button}>
+                    </TouchableOpacity>
+                    <TouchableOpacity activeOpacity={0.7} style={styles.button}>
                         <Text style={styles.buttonText}>Buy a pass</Text>
-                    </View>
+                    </TouchableOpacity>
                 </View>
                 <View style={styles.buttonRow}>
-                    <View style={styles.button}>
+                    <TouchableOpacity activeOpacity={0.7} style={styles.button}>
                         <Text style={styles.buttonText}>Use the voucher</Text>
-                    </View>
-                    <View style={styles.button}>
+                    </TouchableOpacity>
+                    <TouchableOpacity activeOpacity={0.7} style={styles.button}>
                         <Text style={styles.buttonText}>Contact us</Text>
-                    </View>
+                    </TouchableOpacity>
                 </View>
             </View>
+            <TouchableOpacity style={{ alignItems: 'center' }} activeOpacity={0.5}>
+                <FaqButton />
+            </TouchableOpacity>
 
         </View>
     );
@@ -54,6 +69,7 @@ const windowHeight = Dimensions.get('window').height;
 const styles = StyleSheet.create({
     container: {
         backgroundColor: '#ffffff',
+        flex: 1
     },
     ellipse: {
         width: 200,
@@ -67,44 +83,56 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
     title: {
-        fontSize: 30,
+        fontSize: 25,
         fontWeight: 'bold',
         color: '#4563BF',
     },
     upperButtons: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        width: windowWidth - 10,
-        marginHorizontal: 15,
-        top: '-70%',
-        paddingHorizontal: 10,
+        marginHorizontal: 20,
+        marginTop: 50
     },
     theme: {
-        top: '1%',
+        top: '-5%',
+        right: '60%',
+        position: 'absolute'
     },
     logo: {
         alignItems: 'center',
-        top: '-25%',
+        marginTop: 10
     },
     button: {
-        width: 146,
-        height: 146,
+        width: 130,
+        height: 130,
         backgroundColor: '#032CA6',
         borderRadius: 30,
-        margin: 30,
+        margin: 20,
         justifyContent: 'center',
         alignItems: 'center',
+        padding: 10,
     },
     buttonRow: {
         justifyContent: 'center',
         flexDirection: 'row',
     },
     buttonContainer: {
-        top: '-25%',
+        marginTop: 10,
+        paddingHorizontal: 30,
     },
     buttonText: {
         fontWeight: 'bold',
         color: '#FFFFFF',
         fontSize: 17
-    }
+    },
+    profileLogo: {
+        width: 32,
+        height: 32,
+        borderRadius: 20,
+        borderWidth: 17,
+        borderColor: '#032CA6',
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+
 });
