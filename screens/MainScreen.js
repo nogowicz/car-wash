@@ -1,65 +1,67 @@
 import { Dimensions, StyleSheet, View, Text, Image, TouchableOpacity } from "react-native";
 import { Ionicons, FontAwesome5 } from '@expo/vector-icons';
 import FaqButton from "../components/FaqButton";
+import Container from "../components/Container"
 
 function MainScreen({ navigation }) {
 
     return (
-        <View style={styles.container}>
-            <View style={styles.theme}>
-                <View style={[styles.ellipse]} />
-                <View style={[styles.ellipse, { top: -100, left: -100 }]} />
-            </View>
-            <View style={styles.upperButtons}>
-                <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-                    <TouchableOpacity style={[{ width: 45, height: 45, borderRadius: 60 }]}>
-                        <Ionicons name="log-in-outline" size={32} color="black" />
-                        <Text style={[styles.upperButtonsText]}>Log out</Text>
-                    </TouchableOpacity>
-                </View>
-                <TouchableOpacity activeOpacity={0.7} style={[{ width: 45, height: 45, borderRadius: 60 }]}>
-                    <View style={{ justifyContent: 'center' }}>
-                        <View style={styles.profileLogo}>
-                            <Image style={{ width: 30, height: 30, borderRadius: 16 }} source={require('../assets/portrait.jpg')} />
-                        </View>
+        <Container>
+            <View>
+                <View style={styles.upperButtons}>
+                    <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+                        <TouchableOpacity style={[{ width: 45, height: 45, borderRadius: 60 }]}>
+                            <Ionicons name="log-in-outline" size={32} color="black" />
+                            <Text style={[styles.upperButtonsText]}>Log out</Text>
+                        </TouchableOpacity>
                     </View>
+
+                    <TouchableOpacity activeOpacity={0.7} style={[{ width: 45, height: 45, borderRadius: 60 }]}>
+                        <View style={{ justifyContent: 'center' }}>
+                            <View style={styles.profileLogo}>
+                                <Image style={{ width: 30, height: 30, borderRadius: 16 }} source={require('../assets/portrait.jpg')} />
+                            </View>
+                        </View>
+                    </TouchableOpacity>
+
+                </View>
+
+                <View style={styles.logo}>
+                    <FontAwesome5 name="car-alt" size={60} color="#4563BF" />
+                    <Text style={[styles.title]}>Car Wash</Text>
+                </View>
+
+                <View style={styles.buttonContainer}>
+                    <View style={styles.buttonRow}>
+                        <TouchableOpacity
+                            activeOpacity={0.7}
+                            style={styles.button}
+                            onPress={() => {
+                                navigation.navigate('BookScreen')
+                            }}>
+                            <Text style={styles.buttonText}>Book the date</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity activeOpacity={0.7} style={styles.button}>
+                            <Text style={styles.buttonText}>Buy a pass</Text>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={styles.buttonRow}>
+                        <TouchableOpacity activeOpacity={0.7} style={styles.button}>
+                            <Text style={styles.buttonText}>Use the voucher</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity activeOpacity={0.7} style={styles.button}>
+                            <Text style={styles.buttonText}>Contact us</Text>
+                        </TouchableOpacity>
+                    </View>
+                </View>
+                <TouchableOpacity style={{ alignItems: 'center' }} activeOpacity={0.5}>
+                    <FaqButton />
                 </TouchableOpacity>
 
             </View>
-            <View style={styles.logo}>
-                <FontAwesome5 name="car-alt" size={60} color="#4563BF" />
-                <Text style={[styles.title]}>Car Wash</Text>
-            </View>
-
-            <View style={styles.buttonContainer}>
-                <View style={styles.buttonRow}>
-                    <TouchableOpacity
-                        activeOpacity={0.7}
-                        style={styles.button}
-                        onPress={() => {
-                            navigation.navigate('BookScreen')
-                        }}>
-                        <Text style={styles.buttonText}>Book the date</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity activeOpacity={0.7} style={styles.button}>
-                        <Text style={styles.buttonText}>Buy a pass</Text>
-                    </TouchableOpacity>
-                </View>
-                <View style={styles.buttonRow}>
-                    <TouchableOpacity activeOpacity={0.7} style={styles.button}>
-                        <Text style={styles.buttonText}>Use the voucher</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity activeOpacity={0.7} style={styles.button}>
-                        <Text style={styles.buttonText}>Contact us</Text>
-                    </TouchableOpacity>
-                </View>
-            </View>
-            <TouchableOpacity style={{ alignItems: 'center' }} activeOpacity={0.5}>
-                <FaqButton />
-            </TouchableOpacity>
-
-        </View>
+        </Container>
     );
+
 }
 
 export default MainScreen;
@@ -67,17 +69,6 @@ export default MainScreen;
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 const styles = StyleSheet.create({
-    container: {
-        backgroundColor: '#ffffff',
-        flex: 1
-    },
-    ellipse: {
-        width: 200,
-        height: 200,
-        backgroundColor: '#6ab9d9',
-        borderRadius: 120,
-        opacity: 0.46,
-    },
     upperButtonsText: {
         fontSize: 13,
         fontWeight: 'bold',
@@ -91,7 +82,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         marginHorizontal: 20,
-        marginTop: 50
+        marginTop: 40
     },
     theme: {
         top: '-5%',

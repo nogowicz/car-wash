@@ -1,10 +1,12 @@
 import { StyleSheet, View, Text, Pressable } from "react-native";
 
-function DateSelect({ day, dayName }) {
+function DateSelect({ day, dayName, booked, selected, onDatePress }) {
+
+
     return (
         <View style={styles.container}>
             <Text style={styles.text}>{dayName.substring(0, 3)}</Text>
-            <Pressable style={styles.rectangle}>
+            <Pressable onPress={onDatePress} style={[styles.rectangle, (selected) && styles.pressed, (booked) && styles.booked]}>
                 <Text style={styles.number}>{day}</Text>
             </Pressable>
         </View>
@@ -21,8 +23,8 @@ const styles = StyleSheet.create({
     },
     rectangle: {
         backgroundColor: '#032CA6',
-        width: 45,
-        height: 56,
+        width: 35,
+        height: 46,
         borderRadius: 10,
         borderWidth: 1,
         marginTop: 3,
@@ -37,5 +39,11 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         color: '#ffffff',
         fontSize: 20,
+    },
+    pressed: {
+        backgroundColor: '#5670BF'
+    },
+    booked: {
+        backgroundColor: '#999999',
     },
 });

@@ -1,9 +1,11 @@
-import { StyleSheet, View, Text, TouchableOpacity, FlatList } from "react-native";
+import { StyleSheet, View, Text, TouchableOpacity, FlatList, ScrollView } from "react-native";
 import { Ionicons, FontAwesome5 } from '@expo/vector-icons';
 import SelectList from 'react-native-dropdown-select-list';
 import DateSelect from "../components/DateSelect";
 import { useState } from "react";
 import TimeSelect from "../components/TimeSelect";
+import SummaryBox from "../components/SummaryBox";
+import Container from "../components/Container";
 
 function BookScreen({ navigation }) {
     const [selected, setSelected] = useState('Standard Cleaning');
@@ -17,37 +19,37 @@ function BookScreen({ navigation }) {
     ];
 
     const calendar = [
-        { key: '1', value: 'Sunday' },
-        { key: '2', value: 'Monday' },
-        { key: '3', value: 'Tuesday' },
-        { key: '4', value: 'Wednesday' },
-        { key: '5', value: 'Thursday' },
-        { key: '6', value: 'Friday' },
-        { key: '7', value: 'Saturday' },
-        { key: '8', value: 'Sunday' },
-        { key: '9', value: 'Monday' },
-        { key: '10', value: 'Tuesday' },
-        { key: '11', value: 'Wednesday' },
-        { key: '12', value: 'Thursday' },
-        { key: '13', value: 'Friday' },
-        { key: '14', value: 'Saturday' },
-        { key: '15', value: 'Sunday' },
-        { key: '16', value: 'Monday' },
-        { key: '17', value: 'Tuesday' },
-        { key: '18', value: 'Wednesday' },
-        { key: '19', value: 'Thursday' },
-        { key: '20', value: 'Friday' },
-        { key: '21', value: 'Saturday' },
-        { key: '22', value: 'Sunday' },
-        { key: '23', value: 'Monday' },
-        { key: '24', value: 'Tuesday' },
-        { key: '25', value: 'Wednesday' },
-        { key: '26', value: 'Thursday' },
-        { key: '27', value: 'Friday' },
-        { key: '28', value: 'Saturday' },
-        { key: '29', value: 'Sunday' },
-        { key: '30', value: 'Monday' },
-        { key: '31', value: 'Tuesday' },
+        { key: '1', value: 'Sunday', booked: true, selected: true },
+        { key: '2', value: 'Monday', booked: false, selected: true },
+        { key: '3', value: 'Tuesday', booked: false, selected: false },
+        { key: '4', value: 'Wednesday', booked: false, selected: false },
+        { key: '5', value: 'Thursday', booked: false, selected: false },
+        { key: '6', value: 'Friday', booked: false, selected: false },
+        { key: '7', value: 'Saturday', booked: false, selected: false },
+        { key: '8', value: 'Sunday', booked: false, selected: false },
+        { key: '9', value: 'Monday', booked: false, selected: false },
+        { key: '10', value: 'Tuesday', booked: false, selected: false },
+        { key: '11', value: 'Wednesday', booked: false, selected: false },
+        { key: '12', value: 'Thursday', booked: false, selected: false },
+        { key: '13', value: 'Friday', booked: false, selected: false },
+        { key: '14', value: 'Saturday', booked: false, selected: false },
+        { key: '15', value: 'Sunday', booked: false, selected: false },
+        { key: '16', value: 'Monday', booked: false, selected: false },
+        { key: '17', value: 'Tuesday', booked: false, selected: false },
+        { key: '18', value: 'Wednesday', booked: false, selected: false },
+        { key: '19', value: 'Thursday', booked: false, selected: false },
+        { key: '20', value: 'Friday', booked: false, selected: false },
+        { key: '21', value: 'Saturday', booked: false, selected: false },
+        { key: '22', value: 'Sunday', booked: false, selected: false },
+        { key: '23', value: 'Monday', booked: false, selected: false },
+        { key: '24', value: 'Tuesday', booked: false, selected: false },
+        { key: '25', value: 'Wednesday', booked: false, selected: false },
+        { key: '26', value: 'Thursday', booked: false, selected: false },
+        { key: '27', value: 'Friday', booked: false, selected: false },
+        { key: '28', value: 'Saturday', booked: false, selected: false },
+        { key: '29', value: 'Sunday', booked: false, selected: false },
+        { key: '30', value: 'Monday', booked: false, selected: false },
+        { key: '31', value: 'Tuesday', booked: false, selected: false },
     ];
 
     const time = [
@@ -85,102 +87,107 @@ function BookScreen({ navigation }) {
         { key: '32', value: '15:45' },
     ];
 
+    function onDatePress(day, booked, selected) {
+        if (!selected) {
+            if (!booked) {
+                calendar[day - 1].selected = true;
+                console.log(calendar[day - 1].selected)
+            }
+        }
+    }
+
 
     return (
-        <View style={styles.container}>
-            <View style={styles.theme}>
-                <View style={[styles.ellipse]} />
-                <View style={[styles.ellipse, { top: -100, left: -100 }]} />
-            </View>
-            <View style={styles.upperButtons}>
-                <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-                    <TouchableOpacity
-                        style={[{ width: 45, height: 45, borderRadius: 60 }]}
-                        onPress={() => {
-                            navigation.navigate('MainScreen')
+
+        <Container>
+            <View>
+
+                <View style={styles.upperButtons}>
+                    <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+                        <TouchableOpacity
+                            style={[{ width: 45, height: 45, borderRadius: 60 }]}
+                            onPress={() => {
+                                navigation.navigate('MainScreen')
+                            }}
+                        >
+                            <Ionicons name="arrow-back" size={32} color="black" />
+                        </TouchableOpacity>
+                    </View>
+
+                </View>
+                <View style={styles.screenTitle}>
+                    <Text style={styles.screenTitleText}>Book Details</Text>
+                </View>
+
+
+                <View style={styles.buttonContainer}>
+                    <SelectList
+                        setSelected={setSelected}
+                        data={options}
+                        search={false}
+                        boxStyles={styles.button}
+                        dropdownStyles={styles.dropdown}
+                        dropdownTextStyles={{ color: '#FFF', fontWeight: 'bold', fontSize: 13 }}
+                        inputStyles={{ color: '#FFF', fontWeight: 'bold', fontSize: 20 }}
+                        placeholder={selected}
+                        arrowicon={<Ionicons name="md-arrow-down-sharp" size={22} color="#fff" />}
+
+                    />
+                </View>
+
+                <View style={styles.section}>
+                    <Text style={styles.sectionTitle}>Date of the visit</Text>
+                </View>
+
+                <View style={styles.dateSelection}>
+                    <Text style={styles.monthText}>May 2022</Text>
+                    <FlatList
+                        data={calendar}
+                        renderItem={(itemData) =>
+                            <DateSelect
+                                day={itemData.item.key}
+                                dayName={itemData.item.value}
+                                booked={itemData.item.booked}
+                                selected={itemData.item.selected}
+                                onDatePress={() => onDatePress(itemData.item.key, itemData.item.booked, itemData.item.selected)}
+                            />}
+                        keyExtractor={(item, index) => {
+                            return item.key;
                         }}
-                    >
-                        <Ionicons name="arrow-back" size={32} color="black" />
-                    </TouchableOpacity>
+                        horizontal={true}
+                        showsHorizontalScrollIndicator={false}
+                    />
+                </View>
+
+                <View style={styles.section}>
+                    <Text style={styles.sectionTitle}>Time of the visit</Text>
+                </View>
+
+                <View style={styles.dateSelection}>
+                    <FlatList
+                        data={time}
+                        renderItem={(itemData) => <TimeSelect hour={itemData.item.value} />}
+                        keyExtractor={(item, index) => {
+                            return item.key;
+                        }}
+                        horizontal={true}
+                        showsHorizontalScrollIndicator={false}
+                    />
+                </View>
+
+                <View style={styles.summaryContainer}>
+                    <SummaryBox />
                 </View>
 
             </View>
-            <View style={styles.logo}>
-                <FontAwesome5 name="car-alt" size={50} color="#4563BF" />
-                <Text style={[styles.title]}>Car Wash</Text>
-            </View>
-            <View style={styles.screenTitle}>
-                <Text style={styles.screenTitleText}>Book Details</Text>
-            </View>
+        </Container>
 
-
-            <View style={styles.buttonContainer}>
-                <SelectList
-                    setSelected={setSelected}
-                    data={options}
-                    search={false}
-                    boxStyles={styles.button}
-                    dropdownStyles={styles.dropdown}
-                    dropdownTextStyles={{ color: '#FFF', fontWeight: 'bold', fontSize: 13 }}
-                    inputStyles={{ color: '#FFF', fontWeight: 'bold', fontSize: 20 }}
-                    placeholder={selected}
-                    arrowicon={<Ionicons name="md-arrow-down-sharp" size={22} color="#fff" />}
-
-                />
-            </View>
-
-            <View style={styles.section}>
-                <Text style={styles.sectionTitle}>Date of the visit</Text>
-            </View>
-
-            <View style={styles.dateSelection}>
-                <Text style={styles.monthText}>May 2022</Text>
-                <FlatList
-                    data={calendar}
-                    renderItem={(itemData) => <DateSelect day={itemData.item.key} dayName={itemData.item.value} />}
-                    keyExtractor={(item, index) => {
-                        return item.key;
-                    }}
-                    horizontal={true}
-                    showsHorizontalScrollIndicator={false}
-                />
-            </View>
-
-            <View style={styles.section}>
-                <Text style={styles.sectionTitle}>Time of the visit</Text>
-            </View>
-
-            <View style={styles.dateSelection}>
-                <FlatList
-                    data={time}
-                    renderItem={(itemData) => <TimeSelect hour={itemData.item.value} />}
-                    keyExtractor={(item, index) => {
-                        return item.key;
-                    }}
-                    horizontal={true}
-                    showsHorizontalScrollIndicator={false}
-                />
-            </View>
-
-
-        </View>
     );
 }
 
 export default BookScreen;
 
 const styles = StyleSheet.create({
-    container: {
-        backgroundColor: '#ffffff',
-        flex: 1
-    },
-    ellipse: {
-        width: 200,
-        height: 200,
-        backgroundColor: '#6ab9d9',
-        borderRadius: 120,
-        opacity: 0.46,
-    },
     upperButtonsText: {
         fontSize: 13,
         fontWeight: 'bold',
@@ -191,7 +198,7 @@ const styles = StyleSheet.create({
         color: '#4563BF',
     },
     screenTitle: {
-        marginTop: 20,
+        marginTop: 80,
         alignItems: 'center',
         justifyContent: 'center'
     },
@@ -203,20 +210,12 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         marginHorizontal: 20,
-        marginTop: 50
+        marginTop: 40
     },
-    theme: {
-        top: '-5%',
-        right: '60%',
-        position: 'absolute'
-    },
-    logo: {
-        alignItems: 'center',
-        marginTop: 10
-    },
+
     button: {
         width: 320,
-        height: 100,
+        height: 70,
         backgroundColor: '#032CA6',
         borderRadius: 30,
         justifyContent: 'center',
@@ -252,6 +251,11 @@ const styles = StyleSheet.create({
         marginBottom: 10,
     },
 
+    summaryContainer: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 10,
+    },
 
 
 });
