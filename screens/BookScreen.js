@@ -1,26 +1,33 @@
-import { StyleSheet, View, Text, TouchableOpacity, FlatList, ScrollView } from "react-native";
-import { Ionicons, FontAwesome5 } from '@expo/vector-icons';
+import { StyleSheet, View, Text, TouchableOpacity, FlatList, Dimensions } from "react-native";
+import { Ionicons } from '@expo/vector-icons';
 import SelectList from 'react-native-dropdown-select-list';
 import DateSelect from "../components/DateSelect";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TimeSelect from "../components/TimeSelect";
 import SummaryBox from "../components/SummaryBox";
 import Container from "../components/Container";
 
 function BookScreen({ navigation }) {
-    const [selected, setSelected] = useState('Standard Cleaning');
+    const [selected, setSelected] = useState(0);
+    const [calendarData, setCalendarData] = useState();
+    const [timeData, setTimeData] = useState();
+
+    const [selectedDateId, setSelectedDateId] = useState(5);
+    const [selectedTimeId, setSelectedTimeId] = useState(3);
+
+
 
     const options = [
-        { key: '0', value: 'Standard Washing' },
-        { key: '1', value: 'Washing and vacuuming' },
-        { key: '2', value: 'Vacuuming' },
-        { key: '3', value: 'Comprehensive washing' },
-        { key: '4', value: 'Washing the seats' },
+        { key: '0', value: 'Standard Washing', price: 3 },
+        { key: '1', value: 'Washing and vacuuming', price: 6 },
+        { key: '2', value: 'Vacuuming', price: 2 },
+        { key: '3', value: 'Comprehensive washing', price: 15 },
+        { key: '4', value: 'Washing the seats', price: 12 },
     ];
 
     const calendar = [
-        { key: '1', value: 'Sunday', booked: true, selected: true },
-        { key: '2', value: 'Monday', booked: false, selected: true },
+        { key: '1', value: 'Sunday', booked: false, selected: false },
+        { key: '2', value: 'Monday', booked: false, selected: false },
         { key: '3', value: 'Tuesday', booked: false, selected: false },
         { key: '4', value: 'Wednesday', booked: false, selected: false },
         { key: '5', value: 'Thursday', booked: false, selected: false },
@@ -53,45 +60,69 @@ function BookScreen({ navigation }) {
     ];
 
     const time = [
-        { key: '1', value: '8:00' },
-        { key: '2', value: '8:15' },
-        { key: '3', value: '8:30' },
-        { key: '4', value: '8:45' },
-        { key: '5', value: '9:00' },
-        { key: '', value: '9:15' },
-        { key: '7', value: '9:30' },
-        { key: '8', value: '9:45' },
-        { key: '9', value: '10:00' },
-        { key: '10', value: '10:15' },
-        { key: '11', value: '10:30' },
-        { key: '12', value: '10:45' },
-        { key: '13', value: '11:00' },
-        { key: '14', value: '11:15' },
-        { key: '15', value: '11:30' },
-        { key: '16', value: '11:45' },
-        { key: '17', value: '12:00' },
-        { key: '18', value: '12:15' },
-        { key: '19', value: '12:30' },
-        { key: '20', value: '12:45' },
-        { key: '21', value: '13:00' },
-        { key: '22', value: '13:15' },
-        { key: '23', value: '13:30' },
-        { key: '24', value: '13:45' },
-        { key: '25', value: '14:00' },
-        { key: '26', value: '14:15' },
-        { key: '27', value: '14:30' },
-        { key: '28', value: '14:45' },
-        { key: '29', value: '15:00' },
-        { key: '30', value: '15:15' },
-        { key: '31', value: '15:30' },
-        { key: '32', value: '15:45' },
+        { key: '1', value: '8:00', booked: false, selected: false },
+        { key: '2', value: '8:15', booked: false, selected: false },
+        { key: '3', value: '8:30', booked: false, selected: false },
+        { key: '4', value: '8:45', booked: false, selected: false },
+        { key: '5', value: '9:00', booked: false, selected: false },
+        { key: '', value: '9:15', booked: false, selected: false },
+        { key: '7', value: '9:30', booked: false, selected: false },
+        { key: '8', value: '9:45', booked: false, selected: false },
+        { key: '9', value: '10:00', booked: false, selected: false },
+        { key: '10', value: '10:15', booked: false, selected: false },
+        { key: '11', value: '10:30', booked: false, selected: false },
+        { key: '12', value: '10:45', booked: false, selected: false },
+        { key: '13', value: '11:00', booked: false, selected: false },
+        { key: '14', value: '11:15', booked: false, selected: false },
+        { key: '15', value: '11:30', booked: false, selected: false },
+        { key: '16', value: '11:45', booked: false, selected: false },
+        { key: '17', value: '12:00', booked: false, selected: false },
+        { key: '18', value: '12:15', booked: false, selected: false },
+        { key: '19', value: '12:30', booked: false, selected: false },
+        { key: '20', value: '12:45', booked: false, selected: false },
+        { key: '21', value: '13:00', booked: false, selected: false },
+        { key: '22', value: '13:15', booked: false, selected: false },
+        { key: '23', value: '13:30', booked: false, selected: false },
+        { key: '24', value: '13:45', booked: false, selected: false },
+        { key: '25', value: '14:00', booked: false, selected: false },
+        { key: '26', value: '14:15', booked: false, selected: false },
+        { key: '27', value: '14:30', booked: false, selected: false },
+        { key: '28', value: '14:45', booked: false, selected: false },
+        { key: '29', value: '15:00', booked: false, selected: false },
+        { key: '30', value: '15:15', booked: false, selected: false },
+        { key: '31', value: '15:30', booked: false, selected: false },
+        { key: '32', value: '15:45', booked: false, selected: false },
     ];
+
+    useEffect(() => {
+        calendar[5 - 1].selected = true;
+        time[3 - 1].selected = true;
+    }, []);
+
+    useEffect(() => {
+        setCalendarData(calendar)
+    }, [setCalendarData])
+
+    useEffect(() => {
+        setTimeData(time)
+    }, [setTimeData])
 
     function onDatePress(day, booked, selected) {
         if (!selected) {
             if (!booked) {
                 calendar[day - 1].selected = true;
-                console.log(calendar[day - 1].selected)
+                setCalendarData(calendar);
+                setSelectedDateId(day);
+            }
+        }
+    }
+
+    function onTimePress(id, booked, selected) {
+        if (!selected) {
+            if (!booked) {
+                time[id - 1].selected = true;
+                setTimeData(time);
+                setSelectedTimeId(id);
             }
         }
     }
@@ -101,7 +132,6 @@ function BookScreen({ navigation }) {
 
         <Container>
             <View>
-
                 <View style={styles.upperButtons}>
                     <View style={{ justifyContent: 'center', alignItems: 'center' }}>
                         <TouchableOpacity
@@ -129,7 +159,7 @@ function BookScreen({ navigation }) {
                         dropdownStyles={styles.dropdown}
                         dropdownTextStyles={{ color: '#FFF', fontWeight: 'bold', fontSize: 13 }}
                         inputStyles={{ color: '#FFF', fontWeight: 'bold', fontSize: 20 }}
-                        placeholder={selected}
+                        placeholder={options[selected].value}
                         arrowicon={<Ionicons name="md-arrow-down-sharp" size={22} color="#fff" />}
 
                     />
@@ -142,7 +172,7 @@ function BookScreen({ navigation }) {
                 <View style={styles.dateSelection}>
                     <Text style={styles.monthText}>May 2022</Text>
                     <FlatList
-                        data={calendar}
+                        data={calendarData}
                         renderItem={(itemData) =>
                             <DateSelect
                                 day={itemData.item.key}
@@ -156,6 +186,8 @@ function BookScreen({ navigation }) {
                         }}
                         horizontal={true}
                         showsHorizontalScrollIndicator={false}
+
+
                     />
                 </View>
 
@@ -165,8 +197,14 @@ function BookScreen({ navigation }) {
 
                 <View style={styles.dateSelection}>
                     <FlatList
-                        data={time}
-                        renderItem={(itemData) => <TimeSelect hour={itemData.item.value} />}
+                        data={timeData}
+                        renderItem={(itemData) =>
+                            <TimeSelect
+                                hour={itemData.item.value}
+                                booked={itemData.item.booked}
+                                selected={itemData.item.selected}
+                                onTimePress={() => onTimePress(itemData.item.key, itemData.item.booked, itemData.item.selected)}
+                            />}
                         keyExtractor={(item, index) => {
                             return item.key;
                         }}
@@ -176,7 +214,16 @@ function BookScreen({ navigation }) {
                 </View>
 
                 <View style={styles.summaryContainer}>
-                    <SummaryBox />
+                    <SummaryBox
+                        selectedDateId={selectedDateId}
+                        hour={time[selectedTimeId - 1].value}
+                        hourAfter={time[selectedTimeId - 1].value != '15:45' ? time[selectedTimeId].value : '16:00'}
+                        paymentPress={() => {
+                            navigation.navigate('PaymentScreen')
+                        }}
+                        selected={options[selected].value}
+                        price={options[selected].price}
+                    />
                 </View>
 
             </View>
@@ -186,6 +233,8 @@ function BookScreen({ navigation }) {
 }
 
 export default BookScreen;
+
+const windowWidth = Dimensions.get('window').width;
 
 const styles = StyleSheet.create({
     upperButtonsText: {
@@ -198,7 +247,7 @@ const styles = StyleSheet.create({
         color: '#4563BF',
     },
     screenTitle: {
-        marginTop: 80,
+        marginTop: (windowWidth > 380 ? 120 : 80),
         alignItems: 'center',
         justifyContent: 'center'
     },
@@ -243,7 +292,8 @@ const styles = StyleSheet.create({
     },
     dateSelection: {
         marginTop: 10,
-        alignItems: 'center'
+        alignItems: 'center',
+
     },
     monthText: {
         fontWeight: '800',

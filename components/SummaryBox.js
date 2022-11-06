@@ -1,23 +1,37 @@
-import { StyleSheet, View, Text, Image } from "react-native";
+import { StyleSheet, View, Text, TouchableOpacity, Dimensions } from "react-native";
 
-function SummaryBox() {
+function SummaryBox({ selectedDateId, hour, hourAfter, paymentPress, selected, price }) {
+
+    function rand(min, max) {
+        min = parseInt(min, 10)
+        max = parseInt(max, 10)
+
+        if (min > max) {
+            var tmp = min;
+            min = max;
+            max = tmp;
+        }
+
+        return Math.floor(Math.random() * (max - min + 1) + min);
+    }
+
     return (
         <View style={styles.container}>
             <View style={styles.upperContainer}>
                 <View>
-                    <Text style={{ fontWeight: 'bold', fontSize: 20 }}>Standardowe mycie</Text>
-                    <Text>21 Maja 2022 14:30 - 14:45</Text>
-                    <Text style={{ fontWeight: '500' }}>Stanowsiko 3</Text>
+                    <Text style={{ fontWeight: 'bold', fontSize: 20 }}>{selected}</Text>
+                    <Text>{selectedDateId} May 2022 {hour} - {hourAfter}</Text>
+                    <Text style={{ fontWeight: '500' }}>Stand {rand(1, 4)}</Text>
                 </View>
 
                 <View>
-                    <Text style={{ fontWeight: '900', fontSize: 32, marginRight: 10 }}>8 zł</Text>
+                    <Text style={{ fontWeight: '900', fontSize: 32, marginRight: 10 }}>$ {price}</Text>
                 </View>
             </View>
             <View style={styles.bottomContainer}>
-                <View style={styles.paymentButton}>
+                <TouchableOpacity onPress={paymentPress} style={styles.paymentButton}>
                     <Text style={{ color: '#ffffff', fontWeight: 'bold', fontSize: 20 }}>Go to payment</Text>
-                </View>
+                </TouchableOpacity>
             </View>
         </View>
     );
@@ -25,11 +39,13 @@ function SummaryBox() {
 
 export default SummaryBox;
 
+const windowWidth = Dimensions.get('window').width;
+
 const styles = StyleSheet.create({
     container: {
         backgroundColor: '#D5EAF2',
-        width: 330,
-        height: 170,
+        width: (windowWidth > 380 ? 370 : 330),
+        height: (windowWidth > 380 ? 220 : 170),
         borderRadius: 30,
         marginTop: 20,
         padding: 20,

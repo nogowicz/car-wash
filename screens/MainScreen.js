@@ -10,13 +10,13 @@ function MainScreen({ navigation }) {
             <View>
                 <View style={styles.upperButtons}>
                     <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-                        <TouchableOpacity style={[{ width: 45, height: 45, borderRadius: 60 }]}>
+                        <TouchableOpacity style={[{ width: 65, height: 65, borderRadius: 60 }]}>
                             <Ionicons name="log-in-outline" size={32} color="black" />
                             <Text style={[styles.upperButtonsText]}>Log out</Text>
                         </TouchableOpacity>
                     </View>
 
-                    <TouchableOpacity activeOpacity={0.7} style={[{ width: 45, height: 45, borderRadius: 60 }]}>
+                    <TouchableOpacity activeOpacity={0.7} style={[{ width: 65, height: 65, borderRadius: 60 }]}>
                         <View style={{ justifyContent: 'center' }}>
                             <View style={styles.profileLogo}>
                                 <Image style={{ width: 30, height: 30, borderRadius: 16 }} source={require('../assets/portrait.jpg')} />
@@ -67,7 +67,7 @@ function MainScreen({ navigation }) {
 export default MainScreen;
 
 const windowWidth = Dimensions.get('window').width;
-const windowHeight = Dimensions.get('window').height;
+
 const styles = StyleSheet.create({
     upperButtonsText: {
         fontSize: 13,
@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
     upperButtons: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        marginHorizontal: 20,
+        marginLeft: 20,
         marginTop: 40
     },
     theme: {
@@ -94,8 +94,8 @@ const styles = StyleSheet.create({
         marginTop: 10
     },
     button: {
-        width: 130,
-        height: 130,
+        width: (windowWidth > 380 ? 150 : 130),
+        height: (windowWidth > 380 ? 150 : 130),
         backgroundColor: '#032CA6',
         borderRadius: 30,
         margin: 20,

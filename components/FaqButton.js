@@ -1,4 +1,4 @@
-import { StyleSheet, View, Text, Image } from "react-native";
+import { StyleSheet, View, Text, Dimensions } from "react-native";
 import SvgComponent from "./SvgComponent";
 
 function FaqButton() {
@@ -12,11 +12,13 @@ function FaqButton() {
 
 export default FaqButton;
 
+const windowWidth = Dimensions.get('window').width;
+
 const styles = StyleSheet.create({
     container: {
         backgroundColor: '#D5EAF2',
-        width: 300,
-        height: 150,
+        width: (windowWidth > 380 ? 340 : 300),
+        height: (windowWidth > 380 ? 190 : 150),
         borderRadius: 30,
         marginTop: 20,
         flexDirection: 'row',

@@ -18,8 +18,8 @@ function Container({ children }) {
             <ImageBackground source={assets[0]} style={
                 {
                     width,
-                    height,
-                    borderBottomLeftRadius: 40
+                    // height,
+                    height: '50%'
                 }}
             >
 

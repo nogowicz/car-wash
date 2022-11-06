@@ -1,9 +1,9 @@
 import { StyleSheet, View, Text, Pressable } from "react-native";
 
-function TimeSelect({ hour }) {
+function TimeSelect({ hour, booked, selected, onTimePress }) {
     return (
         <View style={styles.container}>
-            <Pressable style={styles.rectangle}>
+            <Pressable onPress={onTimePress} style={[styles.rectangle, (selected) && styles.pressed, (booked) && styles.booked]}>
                 <Text style={styles.hour}>{hour}</Text>
             </Pressable>
         </View>
@@ -32,5 +32,11 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         color: '#ffffff',
         fontSize: 20,
+    },
+    pressed: {
+        backgroundColor: '#5670BF'
+    },
+    booked: {
+        backgroundColor: '#999999',
     },
 });
