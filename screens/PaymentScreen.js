@@ -4,11 +4,13 @@ import Container from "../components/Container";
 import Card from "../components/Card";
 import AddCard from "../components/AddCard";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 
 function PaymentScreen({ navigation }) {
     const windowWidth = Dimensions.get('window').width;
     const windowHeight = Dimensions.get('window').height;
     const [paymentMethod, setPaymentMethod] = useState('Credit card');
+    const price = useSelector((state) => state.price.price);
 
 
     return (
@@ -33,27 +35,27 @@ function PaymentScreen({ navigation }) {
                 <View style={styles.otherPaymentsMethodContainer}>
                     <View>
                         <Text style={{ fontWeight: 'bold', marginBottom: 20, }}>Other payment methods</Text>
-                        <TouchableOpacity style={styles.payment} onPress={() => setPaymentMethod("Credit card")}>
+                        <TouchableOpacity style={[styles.payment, (paymentMethod === 'Credit card') && { opacity: 0.5 }]} onPress={() => setPaymentMethod("Credit card")}>
                             <EvilIcons name="credit-card" size={32} color="black" />
                             <Text style={{ fontWeight: 'bold' }}>Credit card</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={styles.payment} onPress={() => setPaymentMethod("Apple Pay")}>
+                        <TouchableOpacity style={[styles.payment, (paymentMethod === 'Apple Pay') && { opacity: 0.5 }]} onPress={() => setPaymentMethod("Apple Pay")}>
                             <Fontisto name="apple-pay" size={24} color="black" />
                             <Text style={{ fontWeight: 'bold', marginLeft: 5, }}>Apple Pay</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={styles.payment} onPress={() => setPaymentMethod("Pay Pal")}>
+                        <TouchableOpacity style={[styles.payment, (paymentMethod === 'Pay Pal') && { opacity: 0.5 }]} onPress={() => setPaymentMethod("Pay Pal")}>
                             <Fontisto name="paypal-p" size={24} color="black" />
                             <Text style={{ fontWeight: 'bold', marginLeft: 5, }}>Pay Pal</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={styles.payment} onPress={() => setPaymentMethod("Amazon Pay")}>
+                        <TouchableOpacity style={[styles.payment, (paymentMethod === 'Amazon Pay') && { opacity: 0.5 }]} onPress={() => setPaymentMethod("Amazon Pay")}>
                             <FontAwesome5 name="amazon-pay" size={24} color="black" />
                             <Text style={{ fontWeight: 'bold', marginLeft: 5, }}>Amazon Pay</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={styles.payment} onPress={() => setPaymentMethod("Ali Pay")}>
+                        <TouchableOpacity style={[styles.payment, (paymentMethod === 'Ali Pay') && { opacity: 0.5 }]} onPress={() => setPaymentMethod("Ali Pay")}>
                             <FontAwesome5 name="alipay" size={24} color="black" />
                             <Text style={{ fontWeight: 'bold', marginLeft: 5, }}>Ali Pay</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={styles.payment} onPress={() => setPaymentMethod("Cash")}>
+                        <TouchableOpacity style={[styles.payment, (paymentMethod === 'Cash') && { opacity: 0.5 }]} onPress={() => setPaymentMethod("Cash")}>
                             <FontAwesome name="dollar" size={24} color="black" />
                             <Text style={{ fontWeight: 'bold', marginLeft: 5, }}>Cash</Text>
                         </TouchableOpacity>
@@ -76,7 +78,7 @@ function PaymentScreen({ navigation }) {
                             </TouchableOpacity>
                         </View>
                         <View style={styles.rightSide}>
-                            <Text style={{ color: '#fff', fontWeight: '900', fontSize: 36 }}>$ 8</Text>
+                            <Text style={{ color: '#fff', fontWeight: '900', fontSize: 36 }}>$ {price}</Text>
                             <Text style={{ color: '#fff', fontWeight: '700', fontSize: 16 }}>{paymentMethod}</Text>
                         </View>
                     </View>

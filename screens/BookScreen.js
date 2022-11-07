@@ -6,6 +6,8 @@ import { useEffect, useState } from "react";
 import TimeSelect from "../components/TimeSelect";
 import SummaryBox from "../components/SummaryBox";
 import Container from "../components/Container";
+import { useDispatch, useSelector } from "react-redux";
+import { setPrice } from "../store/redux/price";
 
 function BookScreen({ navigation }) {
     const [selected, setSelected] = useState(0);
@@ -14,6 +16,8 @@ function BookScreen({ navigation }) {
 
     const [selectedDateId, setSelectedDateId] = useState(5);
     const [selectedTimeId, setSelectedTimeId] = useState(3);
+    const price = useSelector((state) => state.price.price);
+    const dispatch = useDispatch();
 
 
 
@@ -219,6 +223,7 @@ function BookScreen({ navigation }) {
                         hour={time[selectedTimeId - 1].value}
                         hourAfter={time[selectedTimeId - 1].value != '15:45' ? time[selectedTimeId].value : '16:00'}
                         paymentPress={() => {
+                            dispatch(setPrice({ price: options[selected].price }))
                             navigation.navigate('PaymentScreen')
                         }}
                         selected={options[selected].value}
