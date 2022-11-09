@@ -8,6 +8,7 @@ import { Provider } from 'react-redux';
 import { store } from './store/redux/store';
 import AddCardScreen from './screens/AddCardScreen';
 import VoucherScreen from './screens/VoucherScreen';
+import ContactUsScreen from './screens/ContactUsScreen';
 
 export default function App() {
   const Stack = createNativeStackNavigator();
@@ -46,6 +47,13 @@ export default function App() {
           <Stack.Screen
             name="VoucherScreen"
             component={VoucherScreen}
+            options={{
+              headerShown: false
+            }}
+          />
+          <Stack.Screen
+            name="ContactUsScreen"
+            component={ContactUsScreen}
             options={{
               headerShown: false
             }}
