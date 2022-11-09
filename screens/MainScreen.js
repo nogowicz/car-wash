@@ -66,7 +66,13 @@ function MainScreen({ navigation }) {
                         </TouchableOpacity>
                     </View>
                 </View>
-                <TouchableOpacity style={{ alignItems: 'center' }} activeOpacity={0.5}>
+                <TouchableOpacity
+                    style={{ alignItems: 'center' }}
+                    activeOpacity={0.5}
+                    onPress={() => {
+                        navigation.navigate('FAQScreen')
+                    }}
+                >
                     <FaqButton />
                 </TouchableOpacity>
 

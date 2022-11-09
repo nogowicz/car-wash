@@ -50,7 +50,15 @@ function ContactUsScreen({ navigation }) {
                         </View>
                     </View>
 
-                    <FaqButton />
+                    <TouchableOpacity
+                        style={{ alignItems: 'center' }}
+                        activeOpacity={0.5}
+                        onPress={() => {
+                            navigation.navigate('FAQScreen')
+                        }}
+                    >
+                        <FaqButton />
+                    </TouchableOpacity>
                 </View>
 
 
