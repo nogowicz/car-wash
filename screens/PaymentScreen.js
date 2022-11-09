@@ -29,7 +29,7 @@ function PaymentScreen({ navigation }) {
                     </View>
                 </View>
                 <View style={styles.cardContainer}>
-                    <AddCard />
+                    <AddCard onAddCardPress={() => navigation.navigate('AddCardScreen')} />
                     <Card />
                 </View>
                 <View style={styles.otherPaymentsMethodContainer}>

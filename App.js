@@ -6,6 +6,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import PaymentScreen from './screens/PaymentScreen';
 import { Provider } from 'react-redux';
 import { store } from './store/redux/store';
+import AddCardScreen from './screens/AddCardScreen';
+import VoucherScreen from './screens/VoucherScreen';
 
 export default function App() {
   const Stack = createNativeStackNavigator();
@@ -30,6 +32,20 @@ export default function App() {
           <Stack.Screen
             name="PaymentScreen"
             component={PaymentScreen}
+            options={{
+              headerShown: false
+            }}
+          />
+          <Stack.Screen
+            name="AddCardScreen"
+            component={AddCardScreen}
+            options={{
+              headerShown: false
+            }}
+          />
+          <Stack.Screen
+            name="VoucherScreen"
+            component={VoucherScreen}
             options={{
               headerShown: false
             }}

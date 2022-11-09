@@ -1,9 +1,9 @@
 import { StyleSheet, TouchableOpacity, Dimensions } from "react-native";
 import { AntDesign } from '@expo/vector-icons';
 
-function AddCard() {
+function AddCard({ onAddCardPress }) {
     return (
-        <TouchableOpacity style={styles.addCard}>
+        <TouchableOpacity onPress={onAddCardPress} style={styles.addCard}>
             <AntDesign name="plus" size={24} color="black" />
         </TouchableOpacity>
     );

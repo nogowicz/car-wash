@@ -46,7 +46,13 @@ function MainScreen({ navigation }) {
                         </TouchableOpacity>
                     </View>
                     <View style={styles.buttonRow}>
-                        <TouchableOpacity activeOpacity={0.7} style={styles.button}>
+                        <TouchableOpacity
+                            activeOpacity={0.7}
+                            style={styles.button}
+                            onPress={() => {
+                                navigation.navigate('VoucherScreen')
+                            }}
+                        >
                             <Text style={styles.buttonText}>Use the voucher</Text>
                         </TouchableOpacity>
                         <TouchableOpacity activeOpacity={0.7} style={styles.button}>
