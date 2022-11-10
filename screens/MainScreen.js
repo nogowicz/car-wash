@@ -41,7 +41,13 @@ function MainScreen({ navigation }) {
                             }}>
                             <Text style={styles.buttonText}>Book the date</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity activeOpacity={0.7} style={styles.button}>
+                        <TouchableOpacity
+                            activeOpacity={0.7}
+                            style={styles.button}
+                            onPress={() => {
+                                navigation.navigate('BuyPassScreen')
+                            }}
+                        >
                             <Text style={styles.buttonText}>Buy a pass</Text>
                         </TouchableOpacity>
                     </View>

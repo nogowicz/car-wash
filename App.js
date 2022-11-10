@@ -10,6 +10,7 @@ import AddCardScreen from './screens/AddCardScreen';
 import VoucherScreen from './screens/VoucherScreen';
 import ContactUsScreen from './screens/ContactUsScreen';
 import FAQScreen from './screens/FAQScreen';
+import BuyPassScreen from './screens/BuyPassScreen';
 
 export default function App() {
   const Stack = createNativeStackNavigator();
@@ -62,6 +63,13 @@ export default function App() {
           <Stack.Screen
             name="FAQScreen"
             component={FAQScreen}
+            options={{
+              headerShown: false
+            }}
+          />
+          <Stack.Screen
+            name="BuyPassScreen"
+            component={BuyPassScreen}
             options={{
               headerShown: false
             }}

@@ -20,7 +20,7 @@ function FAQScreen({ navigation }) {
                         <TouchableOpacity
                             style={[{ width: 45, height: 45, borderRadius: 60 }]}
                             onPress={() => {
-                                navigation.navigate('MainScreen')
+                                navigation.goBack();
                             }}
                         >
                             <Ionicons name="arrow-back" size={32} color="black" />
