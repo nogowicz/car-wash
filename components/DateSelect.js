@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
         marginHorizontal: 7,
     },
     rectangle: {
-        backgroundColor: '#032CA6',
+        backgroundColor: '#5670BF',
         width: 35,
         height: 46,
         borderRadius: 10,
@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
         fontSize: 20,
     },
     pressed: {
-        backgroundColor: '#5670BF'
+        backgroundColor: '#032CA6'
     },
     booked: {
         backgroundColor: '#999999',

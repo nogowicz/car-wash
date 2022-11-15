@@ -37,7 +37,10 @@ function AddCardScreen({ navigation }) {
                 </View>
                 <View style={styles.form}>
                     <FormCard value={value} />
-                    <Button onPress={() => setValue('')} />
+                    <Button
+                        onPress={() => setValue('')}
+                        text='Save'
+                    />
                 </View>
             </View>
         </Container>

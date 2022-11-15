@@ -34,8 +34,7 @@ function Container({ children }) {
             <ImageBackground source={assets[0]} style={
                 {
                     width,
-                    // height,
-                    height: keyboardStatus ? '55%' : '50%'
+                    height: 200
                 }}
             >
 

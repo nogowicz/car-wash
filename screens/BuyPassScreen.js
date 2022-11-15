@@ -180,11 +180,6 @@ const styles = StyleSheet.create({
         fontSize: 13,
         fontWeight: 'bold',
     },
-    title: {
-        fontSize: 20,
-        fontWeight: 'bold',
-        color: '#4563BF',
-    },
     screenTitle: {
         marginTop: (windowWidth > 380 ? 120 : 80),
         alignItems: 'center',
@@ -220,7 +215,7 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     section: {
-        marginTop: 20,
+        marginTop: 50,
         backgroundColor: '#D5EAF2',
         alignItems: 'center',
         justifyContent: 'center',
@@ -243,7 +238,7 @@ const styles = StyleSheet.create({
     summaryContainer: {
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop: 100,
+        marginTop: 50,
     },
 
 

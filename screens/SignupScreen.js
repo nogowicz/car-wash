@@ -2,14 +2,11 @@ import {
     StyleSheet,
     View,
     Text,
-    TextInput,
-    Dimensions,
-    TouchableOpacity,
     Alert,
 } from "react-native";
 import { FontAwesome5 } from '@expo/vector-icons';
+import { createUser } from "../util/auth";
 import { useState } from "react";
-import { login } from "../util/auth";
 
 import Container from "../components/Container";
 import AuthContent from "../components/auth/AuthContent";
@@ -18,19 +15,19 @@ import { useDispatch } from "react-redux";
 import { authenticate } from "../store/redux/auth";
 
 
-function LoginScreen({ navigation }) {
+function SignupScreen({ navigation }) {
     const [isAuthenticating, setIsAuthenticating] = useState(false);
     const dispatch = useDispatch();
 
-    async function loginHandler({ email, password }) {
+    async function signupHandler({ email, password }) {
         setIsAuthenticating(true);
         try {
-            const token = await login(email, password);
+            const token = await createUser(email, password);
             dispatch(authenticate({ token: token }));
         } catch (error) {
             Alert.alert(
                 'Authentication failed',
-                'Could not log you in. Please check your credentials or try again later!'
+                'Could not create user, please check your input and try again later!'
             )
             setIsAuthenticating(false);
         }
@@ -38,7 +35,7 @@ function LoginScreen({ navigation }) {
 
 
     if (isAuthenticating) {
-        return <LoadingOverlay message='Logging you in...' />
+        return <LoadingOverlay message='Creating user...' />
     }
     return (
         <Container>
@@ -47,14 +44,14 @@ function LoginScreen({ navigation }) {
                     <FontAwesome5 name="car-alt" size={60} color="#4563BF" />
                     <Text style={[styles.title]}>Car Wash</Text>
                 </View>
-                <AuthContent isLogin onAuthenticate={loginHandler} />
+                <AuthContent onAuthenticate={signupHandler} />
 
             </View>
         </Container>
     );
 }
 
-export default LoginScreen;
+export default SignupScreen;
 
 
 

@@ -13,10 +13,8 @@ function BookScreen({ navigation }) {
     const [selected, setSelected] = useState(0);
     const [calendarData, setCalendarData] = useState();
     const [timeData, setTimeData] = useState();
-
     const [selectedDateId, setSelectedDateId] = useState(5);
     const [selectedTimeId, setSelectedTimeId] = useState(3);
-    const price = useSelector((state) => state.price.price);
     const dispatch = useDispatch();
 
 

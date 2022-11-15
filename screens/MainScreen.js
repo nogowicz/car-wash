@@ -1,22 +1,42 @@
-import { Dimensions, StyleSheet, View, Text, Image, TouchableOpacity } from "react-native";
+import {
+    Dimensions,
+    StyleSheet,
+    View,
+    Text,
+    Image,
+    TouchableOpacity
+} from "react-native";
 import { Ionicons, FontAwesome5 } from '@expo/vector-icons';
+import { useDispatch } from "react-redux";
+import { logout } from "../store/redux/auth";
+
 import FaqButton from "../components/FaqButton";
 import Container from "../components/Container"
 
 function MainScreen({ navigation }) {
-
+    const dispatch = useDispatch();
     return (
         <Container>
             <View>
                 <View style={styles.upperButtons}>
                     <View style={{ justifyContent: 'center', alignItems: 'center' }}>
-                        <TouchableOpacity style={[{ width: 65, height: 65, borderRadius: 60 }]}>
+                        <TouchableOpacity
+                            onPress={() => {
+                                dispatch(logout());
+                            }}
+                            style={[{ width: 65, height: 65, borderRadius: 60 }]}>
                             <Ionicons name="log-in-outline" size={32} color="black" />
                             <Text style={[styles.upperButtonsText]}>Log out</Text>
                         </TouchableOpacity>
                     </View>
 
-                    <TouchableOpacity activeOpacity={0.7} style={[{ width: 65, height: 65, borderRadius: 60 }]}>
+                    <TouchableOpacity
+                        activeOpacity={0.7}
+                        style={[{ width: 65, height: 65, borderRadius: 60 }]}
+                        onPress={() => {
+                            navigation.navigate("ProfileScreen")
+                        }}
+                    >
                         <View style={{ justifyContent: 'center' }}>
                             <View style={styles.profileLogo}>
                                 <Image style={{ width: 30, height: 30, borderRadius: 16 }} source={require('../assets/portrait.jpg')} />
@@ -107,11 +127,6 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         marginLeft: 20,
         marginTop: 40
-    },
-    theme: {
-        top: '-5%',
-        right: '60%',
-        position: 'absolute'
     },
     logo: {
         alignItems: 'center',

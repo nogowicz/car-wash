@@ -112,7 +112,6 @@ const styles = StyleSheet.create({
     otherPaymentsMethodContainer: {
         marginTop: 20,
         marginHorizontal: 20,
-        height: '85%',
         backgroundColor: '#D5EAF2',
         borderRadius: 10,
         alignItems: 'center',
@@ -125,7 +124,7 @@ const styles = StyleSheet.create({
         marginBottom: 20,
     },
     paymentButton: {
-        marginVertical: 20,
+        marginTop: 20,
         width: '100%',
         height: '30%',
         backgroundColor: '#032CA6',
