@@ -1,4 +1,4 @@
-# car-wash Car Wash
+# Car Wash
 A simple application for booking appointments and managing your passes in the Car Wash network.
 Figma link: https://www.figma.com/file/JiVn5aoyAY4gBJ5N40eKYv/Myjnia-Samochodowa?node-id=8%3A124&t=i4RldqaevGkhsoJx-0
 
